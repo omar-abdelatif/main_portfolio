@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 import { useEffect, useState } from 'react';
 import Layout from '@/components/layout';
 import ProjectCard from '@/components/project-card';
@@ -16,7 +16,6 @@ export default function Projects({ projectsData }: ProjectsPageProps) {
     const [visibleProjects, setVisibleProjects] = useState(6);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    
     useEffect(() => {
         const loadProjects = async () => {
             try {
@@ -34,18 +33,14 @@ export default function Projects({ projectsData }: ProjectsPageProps) {
         };
         loadProjects();
     }, []);
-
-
     useEffect(() => {
         setVisibleProjects(6);
     }, [activeFilter]);
-
     const filteredProjects = projects.filter(project => {
         if (activeFilter === 'All Projects') return true;
         return project.subcategory.toLowerCase() === activeFilter.toLowerCase();
     });
     const displayedProjects = filteredProjects.slice(0, visibleProjects);
-
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
