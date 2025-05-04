@@ -4,7 +4,7 @@ import { fetchPricing } from '@/utils/api';
 interface Pricing {
     name: string;
     price: number;
-    items: PricingItems[];
+    items: string | PricingItems[];
 }
 
 interface PricingItems {
@@ -20,7 +20,7 @@ interface PricingPageProps {
 export default function Pricing({ pricingData }: PricingPageProps) {
     return (
         <Layout>
-            <section className="pricing-wrapper">
+            <section className="pricing-wrapper mb-10">
                 <div className="container-full px-10">
                     <h1 className="text-5xl text-center font-bold mb-10 sm:mb-10 md:mb-15">Pricing Plans</h1>
                     <div className="w-full flex justify-center items-center px-4">
