@@ -20,9 +20,7 @@ export default function ProjectCard({ name, image, tags, slug, subcategory }: Pr
         <div className="bg-[#F7D990] card overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-5">
             <div className="card-body">
                 <div className="relative w-full aspect-[4/3]">
-                    <div className="card-image">
-                        <Image src={image} alt={name} fill className="w-full" />
-                    </div>
+                    <Image src={image} alt={name} fill priority sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="w-full" />
                     <div className="absolute top-0 left-0 w-full text-center bg-yellow-100 px-3 py-1 rotate-[-45deg] translate-x-[-38%] translate-y-[100%]">
                         <span className="text-yellow-800 font-bold text-lg">
                             {subcategory}

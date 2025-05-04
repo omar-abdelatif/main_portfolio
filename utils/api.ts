@@ -1,16 +1,6 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
-
-type Project = {
-    id: number;
-    slug: string;
-    name: string;
-    description: string;
-    image: string;
-    tags: string[];
-    link: string;
-    github_url: string;
-}
+import { Project } from '@/components/types/project';
 
 export async function fetchFromAPI(endpoint: string) {
     try {
