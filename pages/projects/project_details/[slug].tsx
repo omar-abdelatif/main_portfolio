@@ -14,7 +14,6 @@ interface ProjectDetailsPageProps {
 export default function ProjectDetails({ projectData }: ProjectDetailsPageProps) {
     if (!projectData) return <ProjectNotFound />;
     const parsedTags = JSON.parse(projectData.tags).map((tag: { value: string }) => tag.value);
-    console.log(parsedTags);
     return (
         <Layout>
             <section className="project-details py-10">
