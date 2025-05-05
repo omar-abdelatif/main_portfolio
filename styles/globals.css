@@ -1,28 +1,33 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-body{
-    background-image: url('../public/assets/images/banner_1.jpg');
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+:root {
+	--font-cairo: 'Cairo', sans-serif;
+}
+
+body {
+	background-image: url('../public/assets/images/banner_1.jpg');
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	font-family: var(--font-cairo);
 }
 
 .nav-brand {
-    color: #E5A137;
-    font-family: var(--font-cairo);
-    -webkit-text-stroke: 3px #000;
+	color: #e5a137;
+	-webkit-text-stroke: 3px #000;
 }
 
 .card-title {
-    -webkit-text-stroke: 2px #000;
+	-webkit-text-stroke: 2px #000;
 }
 
 .filter-shadow {
-    box-shadow: 0 4px 6px -1px rgba(139, 107, 61, 0.1),  0 2px 4px -1px rgba(139, 107, 61, 0.06);
+	box-shadow: 0 4px 6px -1px rgba(139, 107, 61, 0.1),
+		0 2px 4px -1px rgba(139, 107, 61, 0.06);
 }
 
 .filter-gradient {
-    background: linear-gradient(90deg, #E5A137 0%, #8B6B3D 100%);
+	background: linear-gradient(90deg, #e5a137 0%, #8b6b3d 100%);
 }

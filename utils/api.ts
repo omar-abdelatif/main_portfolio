@@ -37,21 +37,9 @@ export async function fetchProjects(): Promise<Project[]> {
     }
     return [];
 }
-interface ProjectData {
-    id: number;
-    name: string;
-    image: string;
-    tags: string;
-    slug: string;
-    subcategory: string;
-    category: string;
-    description: string;
-    link: string;
-    github_url: string;
-}
-export async function fetchProjectBySlug(slug: string): Promise<ProjectData | null> {
+export async function fetchProjectBySlug(slug: string): Promise<Project | null> {
     try {
-        return await fetchFromAPI(`projects/project_details/${slug}`) as ProjectData;
+        return await fetchFromAPI(`projects/project_details/${slug}`) as Project;
     } catch (error) {
         console.error('Error fetching project by slug:', error);
         return null;

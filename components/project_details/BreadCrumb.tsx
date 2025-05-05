@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useMemo } from 'react';
 
 interface BreadcrumbProps {
     currentTitle?: string;
@@ -8,21 +8,16 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ currentTitle }: BreadcrumbProps) {
     const pathname = usePathname();
-
     const breadcrumbs = useMemo(() => {
         const segments = pathname.split('/').filter(segment => segment !== '');
-
         const items = [
             { label: 'HomePage', href: '/' },
         ];
-
         if (segments.length > 0) {
             let path = '';
             segments.forEach((segment, index) => {
                 path += `/${segment}`;
-
                 if (segment === 'project_details') return;
-
                 if (index === segments.length - 1 && segment !== 'projects' && currentTitle) {
                     items.push({ label: currentTitle, href: path });
                 } else {
@@ -32,7 +27,6 @@ export default function Breadcrumb({ currentTitle }: BreadcrumbProps) {
                 }
             });
         }
-
         return items;
     }, [pathname, currentTitle]);
 
@@ -42,12 +36,7 @@ export default function Breadcrumb({ currentTitle }: BreadcrumbProps) {
                 {breadcrumbs.map((breadcrumb, index) => (
                     <div key={breadcrumb.href} className="flex items-center">
                         {index > 0 && <span className="mx-2 text-black font-bold">/</span>}
-                        <Link
-                            href={breadcrumb.href}
-                            className="text-black font-bold hover:text-[#5C3B10] transition-colors"
-                        >
-                            {breadcrumb.label}
-                        </Link>
+                        <Link href={breadcrumb.href} className="text-black font-bold hover:text-[#5C3B10] transition-colors">{breadcrumb.label}</Link>
                     </div>
                 ))}
             </div>
