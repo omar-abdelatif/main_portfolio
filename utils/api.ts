@@ -45,6 +45,19 @@ export async function fetchProjectBySlug(slug: string): Promise<Project | null> 
         return null;
     }
 }
+
+export async function fetchSimilarProjects(subcategory: string, currentSlug: string): Promise<Project[]> {
+    try {
+        const allProjects = await fetchProjects();
+        return allProjects.filter(project =>
+            project.subcategory.toLowerCase() === subcategory.toLowerCase() &&
+            project.slug !== currentSlug
+        ).slice(0, 6); // Limit to 3 similar projects
+    } catch (error) {
+        console.error('Error fetching similar projects:', error);
+        return [];
+    }
+}
 export async function fetchPricing() {
     const pricingData = await fetchFromAPI('pricing/plans');
     if (Array.isArray(pricingData)) {

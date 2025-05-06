@@ -4,16 +4,18 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Layout from '@/components/layout';
 import ProjectNotFound from '@/pages/not-found';
-import { fetchProjectBySlug } from '@/utils/api';
+import { fetchProjectBySlug, fetchSimilarProjects } from '@/utils/api';
 import { Project } from '@/components/types/project';
 import Breadcrumb from '@/components/project_details/BreadCrumb';
+import SimilarProjects from '@/components/project_details/SimilarProjects';
 import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 
 interface ProjectDetailsPageProps {
     projectData: Project | null;
+    similarProjects: Project[];
 }
 
-export default function ProjectDetails({ projectData }: ProjectDetailsPageProps) {
+export default function ProjectDetails({ projectData, similarProjects }: ProjectDetailsPageProps) {
     const router = useRouter();
     const url = router.asPath;
     if (!projectData) return <ProjectNotFound />;
@@ -27,7 +29,7 @@ export default function ProjectDetails({ projectData }: ProjectDetailsPageProps)
                 <meta property="og:description" content={projectData.description} />
             </Head>
             <Layout>
-                <section className="project-details py-10">
+                <section className="project-details pt-10 pb-5 w-full">
                     <div className="container px-4">
                         <Breadcrumb currentTitle={projectData.name} />
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -58,6 +60,7 @@ export default function ProjectDetails({ projectData }: ProjectDetailsPageProps)
                         </div>
                     </div>
                 </section>
+                <SimilarProjects projects={similarProjects} subcategory={projectData.subcategory} />
             </Layout>
         </>
     )
@@ -67,9 +70,14 @@ export const getServerSideProps: GetServerSideProps<ProjectDetailsPageProps> = a
     const { slug } = context.params as { slug: string };
     try {
         const projectData = await fetchProjectBySlug(slug);
+        let similarProjects: Project[] = [];
+        if (projectData && projectData.subcategory) {
+            similarProjects = await fetchSimilarProjects(projectData.subcategory, slug);
+        }
         return {
             props: {
                 projectData,
+                similarProjects,
             },
         };
     } catch (error) {
@@ -77,6 +85,7 @@ export const getServerSideProps: GetServerSideProps<ProjectDetailsPageProps> = a
         return {
             props: {
                 projectData: null,
+                similarProjects: [],
             },
         };
     }
