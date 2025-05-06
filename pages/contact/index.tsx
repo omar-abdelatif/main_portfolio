@@ -63,7 +63,7 @@ export default function Contact() {
     };
     return (
         <Layout>
-            <section className="contact-wrapper">
+            <section className="contact-wrapper my-8">
                 {isSubmitted && (
                     <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
                         Thank you for your message! I&apos;ll get back to you soon.
@@ -74,7 +74,7 @@ export default function Contact() {
                         <div className="card grid grid-cols-1 md:grid-cols-12 gap-4">
                             <div className="col-span-12 md:col-span-6 lg:col-span-6">
                                 <div className="social-items flex flex-col justify-center h-full">
-                                    <div className="social-title pb-10 sm:pt-10 md:pt-10 lg:pt-0">
+                                    <div className="social-title pb-10 pt-10 sm:pt-10 md:pt-10 lg:pt-0">
                                         <h1 className="text-center text-white text-4xl underline font-bold">Feel Free To Contact Me</h1>
                                     </div>
                                     <div className="social-icons text-center">
@@ -88,19 +88,19 @@ export default function Contact() {
                             </div>
                             <div className="col-span-12 md:col-span-6 lg:col-span-6">
                                 <div className="form-data w-full px-4 sm:px-6 md:px-8">
-                                    <div className="form-inputs py-6 sm:py-8 md:py-10">
+                                    <div className="form-inputs py-5 sm:py-8 md:py-10">
                                         <form onSubmit={handleSubmit} method="post" className="w-full max-w-lg mx-auto">
                                             <div className="mb-3 sm:mb-4">
-                                                <input type="text" name="name" placeholder="Enter Your Name" value={form.name} onChange={handleChange} className="w-full py-4 sm:py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316]" required />
+                                                <input type="text" name="name" placeholder="Enter Your Name" value={form.name} onChange={handleChange} className="w-full lg:py-3 md:py-3 sm:py-2 py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316]" required />
                                             </div>
                                             <div className="mb-3 sm:mb-4">
-                                                <input type="number" name="phone" placeholder="Enter Your Phone Number" value={form.phone} onChange={handleChange} className="w-full py-4 sm:py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316]" required />
+                                                <input type="number" name="phone" placeholder="Enter Your Phone Number" value={form.phone} onChange={handleChange} className="w-full lg:py-3 md:py-3 sm:py-2 py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316]" required />
                                             </div>
                                             <div className="mb-3 sm:mb-4">
-                                                <input type="email" name="email" placeholder="Enter Your Email" value={form.email} onChange={handleChange} className="w-full py-4 sm:py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316]" required />
+                                                <input type="email" name="email" placeholder="Enter Your Email" value={form.email} onChange={handleChange} className="w-full lg:py-3 md:py-3 sm:py-2 py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316]" required />
                                             </div>
                                             <div className="mb-3 sm:mb-4">
-                                                <input type="text" name="subject" placeholder="Enter Subject Title" value={form.subject} onChange={handleChange} className="w-full py-4 sm:py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316]" required />
+                                                <input type="text" name="subject" placeholder="Enter Subject Title" value={form.subject} onChange={handleChange} className="w-full lg:py-3 md:py-3 sm:py-2 py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316]" required />
                                             </div>
                                             <div className="mb-4 sm:mb-5 md:mb-6">
                                                 <textarea name="message" rows={4} value={form.message} onChange={handleChange} className="w-full py-4 sm:py-2 bg-[#F7D990] border-2 border-black rounded-lg text-center font-medium placeholder-black focus:outline-none focus:ring-2 focus:ring-[#BE7316] resize-none" placeholder="Enter Your Message" required ></textarea>

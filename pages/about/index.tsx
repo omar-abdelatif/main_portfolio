@@ -26,7 +26,7 @@ export default function About({ aboutData, skillsData }: AboutPageProps) {
     const about = aboutData[0] || {};
     return (
         <Layout>
-            <section className="about-wrapper">
+            <section className="about-wrapper mt-8 mb-5">
                 <div className="container-full px-10">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                         <div className="bg-[#BE7316] col-span-12 md:col-span-12 lg:col-span-4 rounded-xl p-6 shadow-lg border-2 border-black">

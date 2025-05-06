@@ -16,7 +16,6 @@ interface ProjectDetailsPageProps {
 export default function ProjectDetails({ projectData }: ProjectDetailsPageProps) {
     const router = useRouter();
     const url = router.asPath;
-    console.log('https://omarabdelatif.vercel.app' + url);
     if (!projectData) return <ProjectNotFound />;
     const parsedTags = JSON.parse(projectData.tags).map((tag: { value: string }) => tag.value);
     return (

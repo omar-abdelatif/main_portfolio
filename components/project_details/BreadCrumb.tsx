@@ -32,7 +32,7 @@ export default function Breadcrumb({ currentTitle }: BreadcrumbProps) {
 
     return (
         <nav className="breadcrumb-container mb-8">
-            <div className="rounded-full bg-[#E5A137] border-[3px] border-black p-4 inline-flex items-center">
+            <div className="rounded-full bg-[#E5A137] border-[2px] border-black px-4 py-2 inline-flex items-center">
                 {breadcrumbs.map((breadcrumb, index) => (
                     <div key={breadcrumb.href} className="flex items-center">
                         {index > 0 && <span className="mx-2 text-black font-bold">/</span>}

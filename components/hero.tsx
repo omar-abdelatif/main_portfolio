@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 export default function Hero() {
     return (
-        <motion.section initial={{y: -500}} animate={{y:0}} transition={{duration: 0.7}} className="hero-section lg:mb-26 lg:mt-10 md:mt-0 sm:mt-5 mt-5 transition-all duration-100 ease-out flex justify-center">
+        <motion.section initial={{ y: -500 }} animate={{ y: 0 }} transition={{ duration: 0.7 }} className="hero-section lg:mb-26 md:mb-7 sm:mb-5 lg:mt-25 md:mt-10 sm:mt-5 mt-5 transition-all duration-100 ease-out flex justify-center">
             <div className="container mx-20 sm:mx-0 md:mx-0 lg:mx-0">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <Link href="/about" className="block">

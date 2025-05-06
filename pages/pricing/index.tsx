@@ -20,9 +20,9 @@ interface PricingPageProps {
 export default function Pricing({ pricingData }: PricingPageProps) {
     return (
         <Layout>
-            <section className="pricing-wrapper mb-10">
+            <section className="pricing-wrapper my-10">
                 <div className="container-full px-10">
-                    <h1 className="text-5xl text-center font-bold mb-10 sm:mb-10 md:mb-15">Pricing Plans</h1>
+                    <h1 className="text-5xl text-center font-bold mb-10 sm:mb-10 md:mb-10 lg:mb-15">Pricing Plans</h1>
                     <div className="w-full flex justify-center items-center px-4">
                         <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-8">
                             {pricingData && pricingData.map((plan: Pricing) => {
