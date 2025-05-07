@@ -61,7 +61,7 @@ export default function ProjectDetails({ projectData, similarProjects }: Project
                         </div>
                     </div>
                 </section>
-                <ClientTestimonial name={projectData.testmonials.name} position={projectData.testmonials.position} image={projectData.testmonials.image ?? "https://randomuser.me/api/portraits/men/32.jpg"} quote={projectData.testmonials.content} />
+                {projectData.testmonials && (<ClientTestimonial name={projectData.testmonials.name} position={projectData.testmonials.position} image={projectData.testmonials.image ?? "https://randomuser.me/api/portraits/men/32.jpg"} quote={projectData.testmonials.content} />)}
                 <SimilarProjects projects={similarProjects} subcategory={projectData.subcategory} />
             </Layout>
         </>
