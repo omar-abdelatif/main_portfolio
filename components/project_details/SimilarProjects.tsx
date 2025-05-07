@@ -13,7 +13,7 @@ export default function SimilarProjects({ projects, subcategory }: SimilarProjec
 
     return (
         <section className="similar-projects mt-12 text-center w-full pt-8 border-t-2 border-[#715a34] px-5">
-            <div className="container">
+            <div className="container-full">
                 <h2 className="text-5xl font-bold text-center underline sm:mb-6 md:mb-8 lg:mb-10">Similar {subcategory.charAt(0).toUpperCase() + subcategory.slice(1).toLowerCase()} Projects</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-7 sm:mt-10">
                     {projects.map((project) => (

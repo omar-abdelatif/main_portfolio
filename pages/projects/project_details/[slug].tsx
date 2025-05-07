@@ -8,6 +8,7 @@ import { fetchProjectBySlug, fetchSimilarProjects } from '@/utils/api';
 import { Project } from '@/components/types/project';
 import Breadcrumb from '@/components/project_details/BreadCrumb';
 import SimilarProjects from '@/components/project_details/SimilarProjects';
+import ClientTestimonial from '@/components/project_details/ClientTestimonial';
 import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 
 interface ProjectDetailsPageProps {
@@ -60,6 +61,7 @@ export default function ProjectDetails({ projectData, similarProjects }: Project
                         </div>
                     </div>
                 </section>
+                <ClientTestimonial name={projectData.testmonials.name} position={projectData.testmonials.position} image={projectData.testmonials.image ?? "https://randomuser.me/api/portraits/men/32.jpg"} quote={projectData.testmonials.content} />
                 <SimilarProjects projects={similarProjects} subcategory={projectData.subcategory} />
             </Layout>
         </>

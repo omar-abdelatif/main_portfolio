@@ -1,6 +1,7 @@
 import Layout from '@/components/layout';
 import { fetchAbout, fetchSkills } from '@/utils/api';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface About {
     name: string,
@@ -42,7 +43,7 @@ export default function About({ aboutData, skillsData }: AboutPageProps) {
                                 <p className="text-lg font-bold">Position: {about.position}</p>
                                 <p className="text-lg font-bold">Nationality: {about.nationality}</p>
                                 <div className="text-center mt-6">
-                                    <button className="bg-[#E5A137] hover:bg-[#F7D990] text-black font-bold py-2 px-6 rounded-full border-2 border-black">Hire Now</button>
+                                    <Link href="/contact" className="bg-[#E5A137] hover:bg-[#F7D990] text-black font-bold py-2 px-6 rounded-full border-2 border-black">Hire Now</Link>
                                 </div>
                             </div>
                         </div>

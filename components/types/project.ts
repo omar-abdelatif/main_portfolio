@@ -9,4 +9,10 @@ export interface Project {
     description: string;
     link: string;
     github_url: string;
+    testmonials: {
+        name: string;
+        position: string;
+        image: string;
+        content: string;
+    };
 }
