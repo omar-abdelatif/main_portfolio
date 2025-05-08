@@ -16,7 +16,7 @@ export default function ProjectGallery({ images, projectName }: ProjectGalleryPr
     return (
         <section className="project-gallery mt-12 pt-8 border-t-2 border-[#715a34]">
             <div className="container mx-auto px-4">
-                <h2 className="text-5xl font-bold text-center mb-8">Project Gallery</h2>
+                <h2 className="text-5xl font-bold text-center underline mb-8">Project Gallery</h2>
 
                 {/* Main Image Display */}
                 <div className="relative w-full aspect-video rounded-lg overflow-hidden border-[3px] border-black mb-4 max-w-4xl mx-auto">
