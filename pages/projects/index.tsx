@@ -10,7 +10,7 @@ interface ProjectsPageProps {
 }
 
 export default function Projects({ projectsData }: ProjectsPageProps) {
-    const [activeFilter, setActiveFilter] = useState('All Projects');
+    const [activeFilter, setActiveFilter] = useState('All');
     const [projects, setProjects] = useState<Project[]>(projectsData);
     const [visibleProjects, setVisibleProjects] = useState(6);
     const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +36,7 @@ export default function Projects({ projectsData }: ProjectsPageProps) {
         setVisibleProjects(6);
     }, [activeFilter]);
     const filteredProjects = projects.filter(project => {
-        if (activeFilter === 'All Projects') return true;
+        if (activeFilter === 'All') return true;
         return project.subcategory.toLowerCase() === activeFilter.toLowerCase();
     });
     const displayedProjects = filteredProjects.slice(0, visibleProjects);
@@ -57,7 +57,7 @@ export default function Projects({ projectsData }: ProjectsPageProps) {
     return (
         <Layout>
             <section className="projects-wrapper py-12">
-                <div className="container mx-auto">
+                <div className="container-full px-5">
                     <h1 className="text-5xl font-bold mb-10 text-center">My Projects</h1>
                     <ProjectFilter onFilterChange={setActiveFilter} activeFilter={activeFilter} />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">

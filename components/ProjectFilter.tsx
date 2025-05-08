@@ -4,10 +4,10 @@ interface ProjectFilterProps {
 }
 
 export default function ProjectFilter({ onFilterChange, activeFilter }: ProjectFilterProps) {
-	const filters = ['All Projects', 'web', 'mobile', 'desktop'];
+	const filters = ['All', 'web', 'mobile', 'desktop'];
 
 	return (
-		<div className="w-full max-w-2xl mx-auto mb-8">
+		<div className="w-full max-w-xl mx-auto mb-8">
 			<div className="relative">
 				<div className="flex justify-between items-center rounded-full bg-gradient-to-r from-[#E5A137] to-[#8B6B3D] p-[2px]">
 					<div className="w-full flex justify-between bg-[#E5A137] rounded-full">
