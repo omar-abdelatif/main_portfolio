@@ -15,4 +15,9 @@ export interface Project {
         image: string;
         content: string;
     };
+    galleries: GalleryItem[];
+}
+
+export interface GalleryItem {
+    image: string;
 }

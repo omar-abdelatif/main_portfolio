@@ -9,6 +9,7 @@ import { Project } from '@/components/types/project';
 import Breadcrumb from '@/components/project_details/BreadCrumb';
 import SimilarProjects from '@/components/project_details/SimilarProjects';
 import ClientTestimonial from '@/components/project_details/ClientTestimonial';
+import ProjectGallery from '@/components/project_details/ProjectGallery';
 import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 
 interface ProjectDetailsPageProps {
@@ -20,6 +21,7 @@ export default function ProjectDetails({ projectData, similarProjects }: Project
     const router = useRouter();
     const url = router.asPath;
     if (!projectData) return <ProjectNotFound />;
+    const galleryImages = projectData.galleries.map((item) => item.image);
     const parsedTags = JSON.parse(projectData.tags).map((tag: { value: string }) => tag.value);
     return (
         <>
@@ -61,6 +63,7 @@ export default function ProjectDetails({ projectData, similarProjects }: Project
                         </div>
                     </div>
                 </section>
+                {projectData.galleries && (<ProjectGallery projectName={projectData.name} images={galleryImages} />)}
                 {projectData.testmonials && (<ClientTestimonial name={projectData.testmonials.name} position={projectData.testmonials.position} image={projectData.testmonials.image ?? "https://randomuser.me/api/portraits/men/32.jpg"} quote={projectData.testmonials.content} />)}
                 <SimilarProjects projects={similarProjects} subcategory={projectData.subcategory} />
             </Layout>
