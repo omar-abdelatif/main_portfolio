@@ -11,7 +11,7 @@ export default function ClientTestimonial({ name, position, image, quote }: Test
     return (
         <section className="client-testimonial mt-12 pt-8 border-t-2 border-[#715a34]">
             <div className="container mx-auto px-4">
-                <h2 className="text-5xl font-bold text-center mb-8 underline">Client Opinion</h2>
+                <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center underline mb-4 sm:mb-6 md:mb-8 lg:mb-10">Client Opinion</h1>
                 <div className="bg-[#F7D990] rounded-lg shadow-lg p-6 max-w-3xl mx-auto">
                     <div className="flex flex-col items-center" dir='rtl'>
                         <div className="mb-4 md:mb-0 flex justify-center">
