@@ -16,10 +16,11 @@ export default function Projects({ projectsData }: ProjectsPageProps) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     useEffect(() => {
-        const loadProjects = async () => {
+        async function loadProjects() {
             try {
                 setIsLoading(true);
                 const data = await fetchProjects();
+                console.log(data);
                 setProjects(data);
                 setError(null);
             } catch (err) {
