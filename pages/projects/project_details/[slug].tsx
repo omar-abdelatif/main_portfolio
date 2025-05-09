@@ -70,14 +70,14 @@ export default function ProjectDetails() {
                             <div className="col-span-1 md:col-span-1">
                                 <h1 className="text-4xl font-bold mb-4">{projectData.name}</h1>
                                 <p className="mb-6">{projectData.description}</p>
-                                <div className="flex flex-wrap gap-2 mb-6">
+                                <div className="flex flex-wrap justify-center sm:justify-start md:justify-start lg:justify-start gap-2 mb-6">
                                     {parsedTags.map((tag: string, index: number) => (
                                         <span key={index} className="px-3 py-1 bg-[#976714] text-white rounded-full text-sm">
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-                                <div className="flex gap-4">
+                                <div className="flex gap-4 justify-center sm:justify-start md:justify-start lg:justify-start align-center">
                                     {projectData.link && (
                                         <Link href={projectData.link} target="_blank" rel="noopener noreferrer" className="bg-[#E5A137] hover:bg-[#BE7316] text-white font-bold py-2 px-4 rounded-full border-2 border-black">Visit Project</Link>
                                     )}
