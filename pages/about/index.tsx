@@ -1,30 +1,34 @@
 import Layout from '@/components/layout';
+import { useEffect, useState } from 'react';
 import { fetchAbout, fetchSkills } from '@/utils/api';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { About } from '@/components/types/about';
+import { Skill } from '@/components/types/Skill';
 
-interface About {
-    name: string,
-    about_img: string,
-    description: string,
-    email: string,
-    phone: number,
-    position: string,
-    nationality: string,
-    about_cv: string,
-}
-interface Skill {
-    name: string,
-    level: number,
-    image: string,
-}
-interface AboutPageProps {
-    aboutData: About[];
-    skillsData: Skill[];
-}
+export default function AboutPage() {
+    const [aboutData, setAboutData] = useState<About[]>([]);
+    const [skillsData, setSkillsData] = useState<Skill[]>([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const [about, skills] = await Promise.all([fetchAbout(), fetchSkills()]);
+                setAboutData(about);
+                setSkillsData(skills);
+            } catch (error) {
+                console.error('Error loading data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-export default function About({ aboutData, skillsData }: AboutPageProps) {
+        loadData();
+    }, []);
+
     const about = aboutData[0] || {};
+    console.log(about);
+    if (loading) return <div className="text-center p-10 text-white">Loading...</div>;
     return (
         <Layout>
             <section className="about-wrapper mt-8 mb-5">
@@ -73,24 +77,4 @@ export default function About({ aboutData, skillsData }: AboutPageProps) {
             </section>
         </Layout>
     );
-}
-export async function getServerSideProps() {
-    try {
-        const aboutData = await fetchAbout();
-        const skillsData = await fetchSkills();
-        return {
-            props: {
-                aboutData,
-                skillsData,
-            },
-        };
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return {
-            props: {
-                aboutData: [],
-                skillsData: [],
-            },
-        };
-    }
 }

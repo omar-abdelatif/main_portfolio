@@ -2,24 +2,50 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import Layout from '@/components/layout';
 import ProjectNotFound from '@/pages/not-found';
-import { fetchProjectBySlug, fetchSimilarProjects } from '@/utils/api';
+import { fetchSimilarProjects } from '@/utils/api';
 import { Project } from '@/components/types/project';
 import Breadcrumb from '@/components/project_details/BreadCrumb';
 import SimilarProjects from '@/components/project_details/SimilarProjects';
 import ClientTestimonial from '@/components/project_details/ClientTestimonial';
 import ProjectGallery from '@/components/project_details/ProjectGallery';
-import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 
-interface ProjectDetailsPageProps {
-    projectData: Project | null;
-    similarProjects: Project[];
-}
-
-export default function ProjectDetails({ projectData, similarProjects }: ProjectDetailsPageProps) {
+export default function ProjectDetails() {
     const router = useRouter();
+    const { slug } = router.query;
+
+    const [projectData, setProjectData] = useState<Project | null>(null);
+    const [similarProjects, setSimilarProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (!slug) return;
+
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`/api/project_details/${slug}`);
+                if (!res.ok) throw new Error('Project not found');
+                const data = await res.json();
+                setProjectData(data);
+
+                if (data.subcategory) {
+                    const similarRes = fetchSimilarProjects(data.subcategory, data.slug);
+                    const similarData = await similarRes;
+                    setSimilarProjects(similarData);
+                }
+            } catch {
+                setProjectData(null);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [slug]);
     const url = router.asPath;
+    if (loading) return <div className="text-center py-10">Loading...</div>;
     if (!projectData) return <ProjectNotFound />;
     const galleryImages = projectData.galleries.map((item) => item.image);
     const parsedTags = JSON.parse(projectData.tags).map((tag: { value: string }) => tag.value);
@@ -70,28 +96,3 @@ export default function ProjectDetails({ projectData, similarProjects }: Project
         </>
     )
 }
-
-export const getServerSideProps: GetServerSideProps<ProjectDetailsPageProps> = async ( context: GetServerSidePropsContext ) => {
-    const { slug } = context.params as { slug: string };
-    try {
-        const projectData = await fetchProjectBySlug(slug);
-        let similarProjects: Project[] = [];
-        if (projectData && projectData.subcategory) {
-            similarProjects = await fetchSimilarProjects(projectData.subcategory, slug);
-        }
-        return {
-            props: {
-                projectData,
-                similarProjects,
-            },
-        };
-    } catch (error) {
-        console.error('Error fetching project data:', error);
-        return {
-            props: {
-                projectData: null,
-                similarProjects: [],
-            },
-        };
-    }
-};

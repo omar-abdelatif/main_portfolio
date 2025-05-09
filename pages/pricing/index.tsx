@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Layout from '@/components/layout';
 import { fetchPricing } from '@/utils/api';
 
@@ -13,11 +14,26 @@ interface PricingItems {
     pricing_plan_id: number;
 }
 
-interface PricingPageProps {
-    pricingData: Pricing[];
-}
+export default function PricingPage() {
+    const [pricingData, setPricingData] = useState<Pricing[]>([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const pricing = await fetchPricing();
+                setPricingData(pricing);
+            } catch (error) {
+                console.error('Error fetching pricing data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-export default function Pricing({ pricingData }: PricingPageProps) {
+        loadData();
+    }, []);
+
+    if (loading) return <div className="text-center text-white p-10">Loading...</div>;
+
     return (
         <Layout>
             <section className="pricing-wrapper my-10">
@@ -66,22 +82,4 @@ export default function Pricing({ pricingData }: PricingPageProps) {
             </section>
         </Layout>
     )
-}
-
-export async function getServerSideProps() {
-    try {
-        const pricingData = await fetchPricing();
-        return {
-            props: {
-                pricingData,
-            },
-        };
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return {
-            props: {
-                pricingData: [],
-            },
-        };
-    }
 }

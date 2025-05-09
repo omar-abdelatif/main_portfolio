@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['portfolio.adendan.com'],
     remotePatterns: [
       {
         protocol: 'https',

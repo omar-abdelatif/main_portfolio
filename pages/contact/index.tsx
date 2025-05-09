@@ -40,13 +40,11 @@ export default function Contact() {
         setStatus('Sending...');
         setIsSubmitted(true);
         try {
-            const response = await fetch('https://portfolio.adendan.com/api/v1/send/email', {
+            const response = await fetch('/api/email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
-                    'X-API-Key': process.env.NEXT_PUBLIC_API_KEY || ''
                 },
                 body: JSON.stringify(form)
             });
@@ -54,7 +52,7 @@ export default function Contact() {
             if (response.ok) {
                 setStatus('Message sent successfully!');
             } else {
-                setStatus(`Failed: ${data.message}`);
+                setStatus(`Failed: ${data.error}`);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -117,22 +115,4 @@ export default function Contact() {
             </section>
         </Layout>
     )
-}
-
-export async function getServerSideProps() {
-    try {
-        const socialLinks = await fetchSocialLinks();
-        return {
-            props: {
-                socialLinks,
-            },
-        };
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return {
-            props: {
-                socialLinks: [],
-            },
-        };
-    }
 }

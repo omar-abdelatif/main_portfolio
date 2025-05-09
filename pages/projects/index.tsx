@@ -20,7 +20,6 @@ export default function Projects({ projectsData }: ProjectsPageProps) {
             try {
                 setIsLoading(true);
                 const data = await fetchProjects();
-                console.log(data);
                 setProjects(data);
                 setError(null);
             } catch (err) {
@@ -30,7 +29,7 @@ export default function Projects({ projectsData }: ProjectsPageProps) {
             } finally {
                 setIsLoading(false);
             }
-        };
+        }
         loadProjects();
     }, []);
     useEffect(() => {

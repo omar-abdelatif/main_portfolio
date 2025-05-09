@@ -25,7 +25,7 @@ export default function ProjectGallery({ images, projectName }: ProjectGalleryPr
                 <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
                     {images.map((image, index) => (
                         <div key={index} className={`relative w-20 h-20 cursor-pointer rounded-md overflow-hidden ${index === activeImage ? 'border-[3px] border-[#E5A137]' : 'border border-gray-300'}`} onClick={() => setActiveImage(index)} >
-                            <Image src={image} alt={`${projectName} thumbnail ${index + 1}`} fill className="object-cover" />
+                            <Image src={image} alt={`${projectName} thumbnail ${index + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                         </div>
                     ))}
                 </div>
