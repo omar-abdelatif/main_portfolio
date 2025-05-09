@@ -45,7 +45,13 @@ export default function ProjectDetails() {
         fetchData();
     }, [slug]);
     const url = router.asPath;
-    if (loading) return <div className="text-center py-10">Loading...</div>;
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#E5A137]"></div>
+            </div>
+        );
+    }
     if (!projectData) return <ProjectNotFound />;
     const galleryImages = projectData.galleries.map((item) => item.image);
     const parsedTags = JSON.parse(projectData.tags).map((tag: { value: string }) => tag.value);

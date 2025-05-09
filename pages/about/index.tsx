@@ -27,8 +27,13 @@ export default function AboutPage() {
     }, []);
 
     const about = aboutData[0] || {};
-    console.log(about);
-    if (loading) return <div className="text-center p-10 text-white">Loading...</div>;
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#E5A137]"></div>
+            </div>
+        );
+    }
     return (
         <Layout>
             <section className="about-wrapper mt-8 mb-5">
