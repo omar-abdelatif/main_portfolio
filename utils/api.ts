@@ -1,5 +1,5 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_BASE_URL = process.env.API_BASE_URL;
+const API_KEY = process.env.API_KEY;
 import { Project } from '@/components/types/project';
 
 export async function fetchFromAPI(endpoint: string) {
@@ -13,15 +13,12 @@ export async function fetchFromAPI(endpoint: string) {
             },
             next: { revalidate: 3600 }
         });
-
         if (!response.ok) {
             console.warn(`API response not ok: ${response.status}`);
             return [];
         }
-
         const data = await response.json();
         return data || [];
-
     } catch (error) {
         console.error('Error fetching from API:', error);
         return [];
@@ -32,8 +29,8 @@ export async function fetchProjects(): Promise<Project[]> {
     if (Array.isArray(response)) {
         return response;
     }
-    if (response && Array.isArray(response.data)) {
-        return response.data;
+    if (response && Array.isArray(response)) {
+        return response;
     }
     return [];
 }
@@ -45,14 +42,13 @@ export async function fetchProjectBySlug(slug: string): Promise<Project | null> 
         return null;
     }
 }
-
 export async function fetchSimilarProjects(subcategory: string, currentSlug: string): Promise<Project[]> {
     try {
         const allProjects = await fetchProjects();
         return allProjects.filter(project =>
             project.subcategory.toLowerCase() === subcategory.toLowerCase() &&
             project.slug !== currentSlug
-        ).slice(0, 6); // Limit to 3 similar projects
+        ).slice(0, 6);
     } catch (error) {
         console.error('Error fetching similar projects:', error);
         return [];
