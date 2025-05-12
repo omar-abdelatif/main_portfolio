@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import Layout from '@/components/layout';
-import { fetchPricing } from '@/utils/api';
+import { fetchPricing, fetchPaymentMethods } from '@/utils/api';
+import Link from 'next/link';
+import Modal from '@/components/modal';
+import Image from 'next/image';
 
 interface Pricing {
+    id: number;
     name: string;
     price: number;
     items: string | PricingItems[];
@@ -14,13 +18,26 @@ interface PricingItems {
     pricing_plan_id: number;
 }
 
+interface PaymentMethod {
+    id: number;
+    methods_name: string;
+    methods_icon: string;
+    methods_status: string;
+    methods_value: string;
+}
+
 export default function PricingPage() {
     const [pricingData, setPricingData] = useState<Pricing[]>([]);
+    const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
     const [loading, setLoading] = useState(true);
+    const [open, setOpen] = useState(false);
+    const [modalData, setModalData] = useState<Pricing | null>(null);
     useEffect(() => {
         const loadData = async () => {
             try {
                 const pricing = await fetchPricing();
+                const paymentMethods = await fetchPaymentMethods();
+                setPaymentMethods(paymentMethods);
                 setPricingData(pricing);
             } catch (error) {
                 console.error('Error fetching pricing data:', error);
@@ -28,10 +45,8 @@ export default function PricingPage() {
                 setLoading(false);
             }
         };
-
         loadData();
     }, []);
-
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -39,7 +54,6 @@ export default function PricingPage() {
             </div>
         );
     }
-
     return (
         <Layout>
             <section className="pricing-wrapper my-10">
@@ -78,14 +92,40 @@ export default function PricingPage() {
                                                     <p className="text-center font-bold">No items available</p>
                                                 )}
                                             </div>
+                                            <div className="plan-button flex flex-col gap-4 mt-10 text-center">
+                                                <Link href='/contact' className="bg-[#5C3B10] hover:bg-[#7B4F15] text-white font-bold py-2 px-6 rounded-full border-2 border-black transition-colors duration-300">Contact Me</Link>
+                                                <button id={`payment_modal_${plan.id}`} onClick={() => { setOpen(true); setModalData(plan); }} className='bg-[#7B4F15] hover:bg-[#5C3B10] text-white font-bold py-2 px-6 rounded-full border-2 border-black transition-colors duration-300'>Payment Methods</button>
+                                            </div>
                                         </div>
                                     </div>
                                 );
                             })}
+                            {modalData && (
+                                <Modal isOpen={open} onClose={() => setOpen(false)} id={`payment_modal_${modalData.id}`}>
+                                    <div className="payment-data">
+                                        <h2 className="text-2xl font-bold mb-4">Payment Methods</h2>
+                                        <div className="payment-content">
+                                            {paymentMethods.filter(social => social.methods_status === 'active').map((method) => (
+                                                <div key={method.id} className="payment-item flex items-center justify-between px-8 mb-4">
+                                                    <div className="payment-header aspect-auto flex">
+                                                        <Image src={method.methods_icon} alt={method.methods_name} width={100} height={100} className="w-10 h-10 mr-4" />
+                                                        <span className="font-bold">{method.methods_name}</span>
+                                                    </div>
+                                                    <div className="payment-">
+                                                        <span className="font-bold">
+                                                            <Link href=''>{method.methods_value}</Link>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </Modal>
+                            )}
                         </div>
                     </div>
                 </div>
             </section>
         </Layout>
-    )
+    );
 }

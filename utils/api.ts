@@ -99,3 +99,19 @@ export async function fetchSocialLinks() {
         return [];
     }
 }
+export async function fetchPaymentMethods() {
+    try {
+        const response = await fetch('/api/payment_methods');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (Array.isArray(data)) {
+            return data;
+        }
+        return [];
+    } catch (error) {
+        console.error('Error fetching payment methods:', error);
+        return [];
+    }
+}

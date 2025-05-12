@@ -5,13 +5,9 @@ import ProjectFilter from '@/components/ProjectFilter';
 import { fetchProjects } from '@/utils/api';
 import { Project } from '@/components/types/project';
 
-interface ProjectsPageProps {
-    projectsData: Project[];
-}
-
-export default function Projects({ projectsData }: ProjectsPageProps) {
+export default function Projects() {
     const [activeFilter, setActiveFilter] = useState('All');
-    const [projects, setProjects] = useState<Project[]>(projectsData);
+    const [projects, setProjects] = useState<Project[]>([]);
     const [visibleProjects, setVisibleProjects] = useState(6);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -80,22 +76,4 @@ export default function Projects({ projectsData }: ProjectsPageProps) {
             </section>
         </Layout>
     )
-}
-
-export async function getServerSideProps() {
-    try {
-        const projectsData = await fetchProjects();
-        return {
-            props: {
-                projectsData,
-            },
-        };
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return {
-            props: {
-                projectsData: [],
-            },
-        };
-    }
 }
