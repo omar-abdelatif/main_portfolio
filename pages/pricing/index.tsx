@@ -104,18 +104,18 @@ export default function PricingPage() {
                                 <Modal isOpen={open} onClose={() => setOpen(false)} id={`payment_modal_${modalData.id}`}>
                                     <div className="payment-data">
                                         <h2 className="text-2xl font-bold mb-4">Payment Methods</h2>
-                                        <div className="payment-content">
+                                        <div className="payment-content flex items-center gap-4 flex-wrap justify-center">
                                             {paymentMethods.filter(social => social.methods_status === 'active').map((method) => (
-                                                <div key={method.id} className="payment-item flex items-center justify-between px-8 mb-4">
-                                                    <div className="payment-header aspect-auto flex">
+                                                <div key={method.id} className="payment-item flex items-center justify-between px-8">
+                                                    <div className="payment-header aspect-auto flex items-center">
                                                         <Image src={method.methods_icon} alt={method.methods_name} width={100} height={100} className="w-10 h-10 mr-4" />
                                                         <span className="font-bold">{method.methods_name}</span>
                                                     </div>
-                                                    <div className="payment-">
+                                                    {/* <div className="payment-data">
                                                         <span className="font-bold">
-                                                            <Link href=''>{method.methods_value}</Link>
+                                                            <Link href={method.methods_value}>{method.methods_name === 'instapay' ? 'View Link' : method.methods_value}</Link>
                                                         </span>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             ))}
                                         </div>
