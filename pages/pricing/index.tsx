@@ -111,11 +111,6 @@ export default function PricingPage() {
                                                         <Image src={method.methods_icon} alt={method.methods_name} width={100} height={100} className="w-10 h-10 mr-4" />
                                                         <span className="font-bold">{method.methods_name}</span>
                                                     </div>
-                                                    {/* <div className="payment-data">
-                                                        <span className="font-bold">
-                                                            <Link href={method.methods_value}>{method.methods_name === 'instapay' ? 'View Link' : method.methods_value}</Link>
-                                                        </span>
-                                                    </div> */}
                                                 </div>
                                             ))}
                                         </div>
