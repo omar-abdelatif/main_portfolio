@@ -65,32 +65,34 @@ export default function PricingPage() {
                                 const parsedItems: PricingItems[] = typeof plan.items === 'string' ? JSON.parse(plan.items) : plan.items;
                                 return (
                                     <div key={plan.name} className="rounded-2xl overflow-hidden border-2 border-[#5C3B10] shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-5">
-                                        <div className="bg-[#E5A137] p-6 h-full">
-                                            <h2 className="text-2xl font-bold text-center underline">{plan.name}</h2>
-                                            <div className="plan-price mt-5 text-center mb-7">
-                                                <div className="price-title mb-2">
-                                                    <p className="font-bold underline">Start Price</p>
+                                        <div className="bg-[#E5A137] p-6 h-full flex flex-col justify-between">
+                                            <div className="plan-data">
+                                                <h2 className="text-2xl font-bold text-center underline">{plan.name}</h2>
+                                                <div className="plan-price mt-5 text-center mb-7">
+                                                    <div className="price-title mb-2">
+                                                        <p className="font-bold underline">Start Price</p>
+                                                    </div>
+                                                    <div className="price-number">
+                                                        <span className="text-4xl font-bold text-center">{plan.price}EGP</span>
+                                                        <span className="text-black font-bold ml-2">/ project</span>
+                                                    </div>
                                                 </div>
-                                                <div className="price-number">
-                                                    <span className="text-4xl font-bold text-center">{plan.price}EGP</span>
-                                                    <span className="text-black font-bold ml-2">/ project</span>
+                                                <div className="plan-items">
+                                                    {plan.items && plan.items.length > 0 ? (
+                                                        <ul className="space-y-3">
+                                                            {parsedItems.map((item: PricingItems) => (
+                                                                <li key={item.id} className="flex items-center">
+                                                                    <svg className="h-5 w-5 text-white-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                                                    </svg>
+                                                                    <span className="font-bold">{item.title}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    ) : (
+                                                        <p className="text-center font-bold">No items available</p>
+                                                    )}
                                                 </div>
-                                            </div>
-                                            <div className="plan-items">
-                                                {plan.items && plan.items.length > 0 ? (
-                                                    <ul className="space-y-3">
-                                                        {parsedItems.map((item: PricingItems) => (
-                                                            <li key={item.id} className="flex items-center">
-                                                                <svg className="h-5 w-5 text-white-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                                                </svg>
-                                                                <span className="font-bold">{item.title}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                ) : (
-                                                    <p className="text-center font-bold">No items available</p>
-                                                )}
                                             </div>
                                             <div className="plan-button flex flex-col gap-4 mt-10 text-center">
                                                 <Link href='/contact' className="bg-[#5C3B10] hover:bg-[#7B4F15] text-white font-bold py-2 px-6 rounded-full border-2 border-black transition-colors duration-300">Contact Me</Link>
