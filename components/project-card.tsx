@@ -7,13 +7,14 @@ interface ProjectCardProps {
     tags: string | { value: string }[] | string[];
     slug: string;
     subcategory: string;
+    official: string;
 }
 
 interface TagType {
     value: string;
 }
 
-export default function ProjectCard({ name, image, tags, slug, subcategory }: ProjectCardProps) {
+export default function ProjectCard({ name, image, tags, slug, subcategory, official }: ProjectCardProps) {
     const parsedTags = typeof tags === 'string' ? (tags.startsWith('[') ? JSON.parse(tags) : tags.split(',').map((tag): TagType => ({ value: tag.trim() }))) : (Array.isArray(tags) ? tags.map((tag): TagType => typeof tag === 'string' ? { value: tag } : tag as TagType) : []);
 
     return (
@@ -24,6 +25,9 @@ export default function ProjectCard({ name, image, tags, slug, subcategory }: Pr
                     <span className="text-yellow-800 font-bold text-lg">
                         {subcategory}
                     </span>
+                </div>
+                <div className="official-status absolute px-4 py-1 bg-[#F7D990] border-3 border-[#976714] bottom-5 left-5 rounded-2xl text-center text-lg">
+                    <p className='font-bold'>{official}</p>
                 </div>
             </div>
             <div className="card-body gap-4 p-5 h-full">

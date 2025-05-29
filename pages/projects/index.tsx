@@ -59,7 +59,7 @@ export default function Projects() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {displayedProjects.length > 0 ? (
                             displayedProjects.map((project) => (
-                                <ProjectCard key={project.slug} name={project.name} image={project.image} tags={project.tags} slug={project.slug} subcategory={project.subcategory} />
+                                <ProjectCard key={project.slug} name={project.name} image={project.image} tags={project.tags} slug={project.slug} subcategory={project.subcategory} official={project.officiality_status} />
                             ))
                         ) : (
                             <div className="col-span-full text-center text-black">
