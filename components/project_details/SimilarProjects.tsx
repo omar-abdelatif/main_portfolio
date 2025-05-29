@@ -17,7 +17,7 @@ export default function SimilarProjects({ projects, subcategory }: SimilarProjec
                 <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center underline sm:mb-6 md:mb-8 lg:mb-10">Similar {subcategory.charAt(0).toUpperCase() + subcategory.slice(1).toLowerCase()} Projects</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-7 sm:mt-10">
                     {projects.map((project) => (
-                        <ProjectCard key={project.slug} name={project.name} image={project.image} tags={project.tags} slug={project.slug} subcategory={project.subcategory} />
+                        <ProjectCard key={project.slug} name={project.name} image={project.image} tags={project.tags} slug={project.slug} subcategory={project.subcategory} official={project.officiality_status} />
                     ))}
                 </div>
             </div>
